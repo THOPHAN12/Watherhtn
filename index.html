@@ -10,14 +10,13 @@
         /* Giao diện tối giản */
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffffff; /* Đặt nền màu trắng */
+            background-color: #f0f8ff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
-            padding: 0;
         }
         header {
             background-color: #007bff;
@@ -31,7 +30,7 @@
             height: auto;
         }
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 400px;
             background-color: #fff;
             padding: 20px;
@@ -82,35 +81,21 @@
         /* Định dạng bản đồ ở góc trái màn hình */
         .vietnam-map {
             position: fixed;
-            top: 50px;
-            left: 50px;
-            width: 90vw; /* Điều chỉnh để phù hợp với kích thước màn hình */
-            max-width: 380px;
-            opacity: 1.4; /* Độ trong suốt nếu cần */
+            top: 200px;
+            left: 100px;
+            width: 400px; /* Thay đổi kích thước theo ý muốn */
+            opacity: 0.8; /* Độ trong suốt nếu cần */
             z-index: 500; /* Đảm bảo bản đồ luôn nằm trên cùng */
             transition: transform 1s ease; /* Hiệu ứng chuyển động */
         }
         .vietnam-map.active {
             transform: translateY(-100px); /* Hiệu ứng chuyển động khi trang tải */
         }
-
-        /* Điều chỉnh cho màn hình nhỏ */
-        @media (max-width: 600px) {
-            .container {
-                width: 95%;
-                padding: 15px;
-            }
-
-            .vietnam-map {
-                width: 85vw; /* Tỷ lệ bản đồ cho màn hình nhỏ */
-                top: 30px;
-            }
-        }
     </style>
 </head>
 <body>
     <!-- Hình ảnh bản đồ Việt Nam -->
-    <img src="https://i.pinimg.com/736x/fb/f9/67/fbf9675abdd08b90f3788883ee71b28f.jpg" class="vietnam-map" id="vietnamMap">
+    <img src="D:\REPORT_HTN\WED\snapedit_1730698817802.jpeg" alt="Bản đồ Việt Nam" class="vietnam-map" id="vietnamMap">
     <div class="container">
         <h2>Nhập khu vực để lấy thời tiết cập nhật cho vi điều khiển</h2>
         <input type="text" id="location" placeholder="Nhập tên thành phố hoặc khu vực" onkeypress="checkEnter(event)">
@@ -126,7 +111,7 @@
         async function getWeather() {
             const location = document.getElementById('location').value;
             const apiKey = 'e7c76e2285f76038d6a6fc8115b212cc';
-            const apiUrl = https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=vi&units=metric;
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=vi&units=metric`;
 
             document.getElementById('weatherResult').innerHTML = '<p>Đang tải...</p>';
             
@@ -141,16 +126,16 @@
                 const lat = weatherData.coord.lat;
                 const lon = weatherData.coord.lon;
 
-                document.getElementById('weatherResult').innerHTML =  
+                document.getElementById('weatherResult').innerHTML = `
                     <h3>Thời tiết tại ${cityName}</h3>
                     <p>Nhiệt độ: ${temperature}°C</p>
                     <p>Mô tả: ${description}</p>
-                ;
+                `;
                 document.getElementById('weatherResult').classList.remove('error');
 
                 showMap(lat, lon);
             } catch (error) {
-                document.getElementById('weatherResult').innerHTML = <p class="error">${error.message}</p>;
+                document.getElementById('weatherResult').innerHTML = `<p class="error">${error.message}</p>`;
                 document.getElementById('weatherResult').classList.add('error');
             }
         }
