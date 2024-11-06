@@ -18,9 +18,7 @@
             height: 100vh;
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Ngăn không cho trang web bị cuộn ngang */
         }
-
         header {
             background-color: #007bff;
             padding: 10px;
@@ -28,12 +26,10 @@
             width: 100%;
             margin-bottom: 20px;
         }
-
         header img {
             width: 100px; /* Thay đổi kích thước logo theo ý muốn */
             height: auto;
         }
-
         .container {
             width: 90%;
             max-width: 400px;
@@ -43,12 +39,10 @@
             border-radius: 10px;
             text-align: center;
         }
-
         h2 {
             color: #333;
             margin-bottom: 20px;
         }
-
         input[type="text"] {
             width: 100%;
             padding: 10px;
@@ -57,7 +51,6 @@
             border-radius: 5px;
             font-size: 1em;
         }
-
         button {
             width: 100%;
             padding: 10px;
@@ -68,21 +61,17 @@
             font-size: 1em;
             cursor: pointer;
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
         #weatherResult {
             margin-top: 20px;
             color: #333;
         }
-
         .error {
             color: red;
             font-weight: bold;
         }
-
         #map {
             height: 300px;
             width: 100%;
@@ -93,17 +82,19 @@
         /* Định dạng bản đồ ở góc trái màn hình */
         .vietnam-map {
             position: fixed;
-            top: 10px;
-            left: 50%; /* Căn giữa ảnh bản đồ */
-            transform: translateX(-50%); /* Căn giữa ảnh bản đồ */
-            width: 90vw;
+            top: 50px;
+            left: 50px;
+            width: 90vw; /* Điều chỉnh để phù hợp với kích thước màn hình */
             max-width: 380px;
-            height: auto;
-            opacity: 1.4;
-            z-index: 500;
-            transition: transform 1s ease;
+            opacity: 1.4; /* Độ trong suốt nếu cần */
+            z-index: 500; /* Đảm bảo bản đồ luôn nằm trên cùng */
+            transition: transform 1s ease; /* Hiệu ứng chuyển động */
+        }
+        .vietnam-map.active {
+            transform: translateY(-100px); /* Hiệu ứng chuyển động khi trang tải */
         }
 
+        /* Điều chỉnh cho màn hình nhỏ */
         @media (max-width: 600px) {
             .container {
                 width: 95%;
@@ -111,73 +102,15 @@
             }
 
             .vietnam-map {
-                width: 80vw;
-                top: 20px;
-                height: auto;
+                width: 85vw; /* Tỷ lệ bản đồ cho màn hình nhỏ */
+                top: 30px;
             }
-        }
-
-        /* Thanh tab kéo từ trái sang phải */
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-            padding-left: 30px;
-        }
-
-        .sidebar a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            color: #f1f1f1;
-        }
-
-        .sidebar .close-btn {
-            position: absolute;
-            top: 0;
-            left: 50px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        .open-btn {
-            font-size: 30px;
-            cursor: pointer;
-            position: absolute;
-            left: 20px;
-            top: 20px;
-            z-index: 999;
-            color: #007bff;
         }
     </style>
 </head>
 <body>
-    <!-- Thanh tab kéo từ trái -->
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-        <a href="javascript:void(0)">Thông tin 1</a>
-        <a href="javascript:void(0)">Thông tin 2</a>
-        <a href="javascript:void(0)">Thông tin 3</a>
-    </div>
-
-    <span class="open-btn" onclick="openNav()">&#9776; Mở thanh tab</span>
-
     <!-- Hình ảnh bản đồ Việt Nam -->
     <img src="https://i.pinimg.com/736x/fb/f9/67/fbf9675abdd08b90f3788883ee71b28f.jpg" class="vietnam-map" id="vietnamMap">
-
     <div class="container">
         <h2>Nhập khu vực để lấy thời tiết cập nhật cho vi điều khiển</h2>
         <input type="text" id="location" placeholder="Nhập tên thành phố hoặc khu vực" onkeypress="checkEnter(event)">
@@ -193,7 +126,7 @@
         async function getWeather() {
             const location = document.getElementById('location').value;
             const apiKey = 'e7c76e2285f76038d6a6fc8115b212cc';
-            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=vi&units=metric`;
+            const apiUrl = https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=vi&units=metric;
 
             document.getElementById('weatherResult').innerHTML = '<p>Đang tải...</p>';
             
@@ -208,16 +141,16 @@
                 const lat = weatherData.coord.lat;
                 const lon = weatherData.coord.lon;
 
-                document.getElementById('weatherResult').innerHTML = ` 
+                document.getElementById('weatherResult').innerHTML =  
                     <h3>Thời tiết tại ${cityName}</h3>
                     <p>Nhiệt độ: ${temperature}°C</p>
                     <p>Mô tả: ${description}</p>
-                `;
+                ;
                 document.getElementById('weatherResult').classList.remove('error');
 
                 showMap(lat, lon);
             } catch (error) {
-                document.getElementById('weatherResult').innerHTML = `<p class="error">${error.message}</p>`;
+                document.getElementById('weatherResult').innerHTML = <p class="error">${error.message}</p>;
                 document.getElementById('weatherResult').classList.add('error');
             }
         }
@@ -242,14 +175,6 @@
             L.marker([lat, lon]).addTo(map)
                 .bindPopup('Địa điểm: ' + document.getElementById('location').value)
                 .openPopup();
-        }
-
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "250px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
         }
 
         window.onload = function() {
