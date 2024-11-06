@@ -91,6 +91,33 @@
         .vietnam-map.active {
             transform: translateY(-100px); /* Hiệu ứng chuyển động khi trang tải */
         }
+
+        /* Điều chỉnh cho màn hình nhỏ hơn */
+        @media (max-width: 600px) {
+            .vietnam-map {
+                width: 200px; /* Giảm kích thước bản đồ cho điện thoại */
+                top: 100px;
+                left: 10px;
+                opacity: 0.6;
+            }
+            .container {
+                width: 90%;
+                padding: 15px;
+                margin-top: 10px;
+            }
+            header img {
+                width: 80px;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            button {
+                font-size: 0.9em;
+            }
+            #map {
+                height: 200px;
+            }
+        }
     </style>
 </head>
 <body>
