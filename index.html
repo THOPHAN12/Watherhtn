@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lấy Thông Tin Thời Tiết</title>
-    <link rel="icon" href="Image/images.ico" type="image/x-icon">
+    <link rel="icon" href="Image/images.ico">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         /* Giao diện tối giản */
@@ -77,8 +77,6 @@
             margin-top: 20px;
             border-radius: 5px;
         }
-
-        }
     </style>
 </head>
 <body>
@@ -150,10 +148,6 @@
 
         window.onload = function() {
             document.getElementById('location').value = ''; // Đặt lại ô nhập trống mỗi khi tải trang
-            
-            // Thêm hiệu ứng chuyển động cho hình ảnh bản đồ Việt Nam
-            const vietnamMap = document.getElementById('vietnamMap');
-            vietnamMap.classList.add('active');
         };
     </script>
 </body>
