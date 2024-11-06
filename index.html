@@ -82,19 +82,17 @@
         /* Định dạng bản đồ ở góc trái màn hình */
         .vietnam-map {
             position: fixed;
-            top: 50px;
-            left: 50px;
-            width: 90vw; /* Điều chỉnh để phù hợp với kích thước màn hình */
-            max-width: 380px;
+            top: 10px; /* Đảm bảo bản đồ luôn ở trên đầu */
+            left: 50%; /* Căn giữa ảnh bản đồ */
+            transform: translateX(-50%); /* Căn giữa ảnh bản đồ */
+            width: 90vw; /* Sử dụng tỷ lệ phần trăm của chiều rộng màn hình */
+            max-width: 380px; /* Giới hạn chiều rộng tối đa của bản đồ */
+            height: auto; /* Đảm bảo tỷ lệ chiều cao tự động theo chiều rộng */
             opacity: 1.4; /* Độ trong suốt nếu cần */
             z-index: 500; /* Đảm bảo bản đồ luôn nằm trên cùng */
             transition: transform 1s ease; /* Hiệu ứng chuyển động */
         }
-        .vietnam-map.active {
-            transform: translateY(-100px); /* Hiệu ứng chuyển động khi trang tải */
-        }
 
-        /* Điều chỉnh cho màn hình nhỏ */
         @media (max-width: 600px) {
             .container {
                 width: 95%;
@@ -102,8 +100,9 @@
             }
 
             .vietnam-map {
-                width: 85vw; /* Tỷ lệ bản đồ cho màn hình nhỏ */
-                top: 30px;
+                width: 80vw; /* Điều chỉnh tỷ lệ phần trăm cho màn hình nhỏ */
+                top: 20px; /* Đảm bảo bản đồ không che khuất phần tử khác */
+                height: auto; /* Cân chỉnh chiều cao tự động */
             }
         }
     </style>
