@@ -10,7 +10,7 @@
         /* Giao diện tối giản */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
+            background-color: #ffffff; /* Đặt nền màu trắng */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -126,7 +126,7 @@
                 const lat = weatherData.coord.lat;
                 const lon = weatherData.coord.lon;
 
-                document.getElementById('weatherResult').innerHTML = `
+                document.getElementById('weatherResult').innerHTML = ` 
                     <h3>Thời tiết tại ${cityName}</h3>
                     <p>Nhiệt độ: ${temperature}°C</p>
                     <p>Mô tả: ${description}</p>
