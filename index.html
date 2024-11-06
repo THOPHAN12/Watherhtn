@@ -84,7 +84,13 @@
             width: 20vw;
             opacity: 0.8;
             z-index: 500;
-            transition: transform 1s ease;
+            transition: transform 0.3s ease;
+        }
+
+        /* Phóng to khi di chuột vào */
+        .vietnam-map.zoomed {
+            transform: scale(1.5); /* Tăng tỷ lệ lên 1.5 lần */
+            transform-origin: center; /* Phóng to từ tâm */
         }
 
         /* Điều chỉnh cho màn hình nhỏ hơn */
@@ -180,9 +186,16 @@
         window.onload = function() {
             document.getElementById('location').value = ''; // Đặt lại ô nhập trống mỗi khi tải trang
             
-            // Thêm hiệu ứng chuyển động cho hình ảnh bản đồ Việt Nam
             const vietnamMap = document.getElementById('vietnamMap');
-            vietnamMap.classList.add('active');
+            
+            // Thêm hiệu ứng phóng to khi di chuột vào bản đồ Việt Nam
+            vietnamMap.addEventListener('mouseover', function() {
+                vietnamMap.classList.add('zoomed');
+            });
+
+            vietnamMap.addEventListener('mouseout', function() {
+                vietnamMap.classList.remove('zoomed');
+            });
         };
     </script>
 </body>
