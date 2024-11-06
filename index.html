@@ -18,7 +18,9 @@
             height: 100vh;
             margin: 0;
             padding: 0;
+            overflow-x: hidden; /* Ngăn không cho trang web bị cuộn ngang */
         }
+
         header {
             background-color: #007bff;
             padding: 10px;
@@ -26,10 +28,12 @@
             width: 100%;
             margin-bottom: 20px;
         }
+
         header img {
             width: 100px; /* Thay đổi kích thước logo theo ý muốn */
             height: auto;
         }
+
         .container {
             width: 90%;
             max-width: 400px;
@@ -39,10 +43,12 @@
             border-radius: 10px;
             text-align: center;
         }
+
         h2 {
             color: #333;
             margin-bottom: 20px;
         }
+
         input[type="text"] {
             width: 100%;
             padding: 10px;
@@ -51,6 +57,7 @@
             border-radius: 5px;
             font-size: 1em;
         }
+
         button {
             width: 100%;
             padding: 10px;
@@ -61,17 +68,21 @@
             font-size: 1em;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         #weatherResult {
             margin-top: 20px;
             color: #333;
         }
+
         .error {
             color: red;
             font-weight: bold;
         }
+
         #map {
             height: 300px;
             width: 100%;
@@ -82,15 +93,15 @@
         /* Định dạng bản đồ ở góc trái màn hình */
         .vietnam-map {
             position: fixed;
-            top: 10px; /* Đảm bảo bản đồ luôn ở trên đầu */
+            top: 10px;
             left: 50%; /* Căn giữa ảnh bản đồ */
             transform: translateX(-50%); /* Căn giữa ảnh bản đồ */
-            width: 90vw; /* Sử dụng tỷ lệ phần trăm của chiều rộng màn hình */
-            max-width: 380px; /* Giới hạn chiều rộng tối đa của bản đồ */
-            height: auto; /* Đảm bảo tỷ lệ chiều cao tự động theo chiều rộng */
-            opacity: 1.4; /* Độ trong suốt nếu cần */
-            z-index: 500; /* Đảm bảo bản đồ luôn nằm trên cùng */
-            transition: transform 1s ease; /* Hiệu ứng chuyển động */
+            width: 90vw;
+            max-width: 380px;
+            height: auto;
+            opacity: 1.4;
+            z-index: 500;
+            transition: transform 1s ease;
         }
 
         @media (max-width: 600px) {
@@ -100,16 +111,73 @@
             }
 
             .vietnam-map {
-                width: 80vw; /* Điều chỉnh tỷ lệ phần trăm cho màn hình nhỏ */
-                top: 20px; /* Đảm bảo bản đồ không che khuất phần tử khác */
-                height: auto; /* Cân chỉnh chiều cao tự động */
+                width: 80vw;
+                top: 20px;
+                height: auto;
             }
+        }
+
+        /* Thanh tab kéo từ trái sang phải */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            padding-left: 30px;
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidebar .close-btn {
+            position: absolute;
+            top: 0;
+            left: 50px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        .open-btn {
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            z-index: 999;
+            color: #007bff;
         }
     </style>
 </head>
 <body>
+    <!-- Thanh tab kéo từ trái -->
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="javascript:void(0)">Thông tin 1</a>
+        <a href="javascript:void(0)">Thông tin 2</a>
+        <a href="javascript:void(0)">Thông tin 3</a>
+    </div>
+
+    <span class="open-btn" onclick="openNav()">&#9776; Mở thanh tab</span>
+
     <!-- Hình ảnh bản đồ Việt Nam -->
     <img src="https://i.pinimg.com/736x/fb/f9/67/fbf9675abdd08b90f3788883ee71b28f.jpg" class="vietnam-map" id="vietnamMap">
+
     <div class="container">
         <h2>Nhập khu vực để lấy thời tiết cập nhật cho vi điều khiển</h2>
         <input type="text" id="location" placeholder="Nhập tên thành phố hoặc khu vực" onkeypress="checkEnter(event)">
@@ -176,6 +244,14 @@
                 .openPopup();
         }
 
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+        }
+
         window.onload = function() {
             document.getElementById('location').value = ''; // Đặt lại ô nhập trống mỗi khi tải trang
             
@@ -183,6 +259,3 @@
             const vietnamMap = document.getElementById('vietnamMap');
             vietnamMap.classList.add('active');
         };
-    </script>
-</body>
-</html>
