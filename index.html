@@ -15,26 +15,33 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            height: 100vh;
             margin: 0;
         }
-
+        header {
+            background-color: #007bff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        header img {
+            width: 100px; /* Thay đổi kích thước logo theo ý muốn */
+            height: auto;
+        }
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 400px;
             background-color: #fff;
             padding: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             text-align: center;
-            margin: auto;
         }
-
         h2 {
             color: #333;
             margin-bottom: 20px;
         }
-
         input[type="text"] {
             width: 100%;
             padding: 10px;
@@ -43,7 +50,6 @@
             border-radius: 5px;
             font-size: 1em;
         }
-
         button {
             width: 100%;
             padding: 10px;
@@ -53,23 +59,18 @@
             border-radius: 5px;
             font-size: 1em;
             cursor: pointer;
-            margin-bottom: 10px;
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
         #weatherResult {
             margin-top: 20px;
             color: #333;
         }
-
         .error {
             color: red;
             font-weight: bold;
         }
-
         #map {
             height: 300px;
             width: 100%;
@@ -77,47 +78,14 @@
             border-radius: 5px;
         }
 
-        /* Định dạng hình ảnh bản đồ cố định ở góc trái màn hình */
-        .vietnam-map {
-            width: 20vw;
-            opacity: 0.8;
-            margin-bottom: 20px;
-        }
-
-        /* Điều chỉnh cho màn hình nhỏ hơn */
-        @media (max-width: 600px) {
-            .container {
-                width: 100%;
-                padding: 15px;
-            }
-
-            .vietnam-map {
-                width: 40vw;
-                opacity: 0.6;
-            }
-
-            #map {
-                height: 200px;
-            }
-        }
-
-        /* CSS để phóng to toàn bộ trang */
-        .zoomed {
-            transform: scale(1.5); /* Phóng to lên 1.5 lần */
-            transform-origin: center top; /* Phóng to từ phía trên */
         }
     </style>
 </head>
 <body>
-    <!-- Hình ảnh bản đồ Việt Nam -->
-    <img src="https://i.pinimg.com/736x/fb/f9/67/fbf9675abdd08b90f3788883ee71b28f.jpg" alt="Bản đồ Việt Nam" class="vietnam-map" id="vietnamMap">
-    
-    <div class="container" id="content">
+    <div class="container">
         <h2>Nhập khu vực để lấy thời tiết cập nhật cho vi điều khiển</h2>
         <input type="text" id="location" placeholder="Nhập tên thành phố hoặc khu vực" onkeypress="checkEnter(event)">
         <button onclick="getWeather()">Lấy Thời Tiết</button>
-        <button onclick="zoomIn()">Phóng To</button>
-        <button onclick="zoomOut()">Thu Nhỏ</button>
         <div id="weatherResult"></div>
         <div id="map"></div>
     </div>
@@ -125,14 +93,6 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         let map;
-
-        function zoomIn() {
-            document.getElementById('content').classList.add('zoomed');
-        }
-
-        function zoomOut() {
-            document.getElementById('content').classList.remove('zoomed');
-        }
 
         async function getWeather() {
             const location = document.getElementById('location').value;
@@ -190,6 +150,10 @@
 
         window.onload = function() {
             document.getElementById('location').value = ''; // Đặt lại ô nhập trống mỗi khi tải trang
+            
+            // Thêm hiệu ứng chuyển động cho hình ảnh bản đồ Việt Nam
+            const vietnamMap = document.getElementById('vietnamMap');
+            vietnamMap.classList.add('active');
         };
     </script>
 </body>
